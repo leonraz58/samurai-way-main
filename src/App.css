@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+/*то что выше - тут уже было*/
+
+ul li {
+  list-style-type: disc;
+}
+
