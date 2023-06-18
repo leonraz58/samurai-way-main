@@ -7,7 +7,7 @@
     color: greenyellow;
 }
 
-.item.active {
+.item.activeLink {
     color: gold;
 }
 
