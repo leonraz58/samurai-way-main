@@ -4,11 +4,13 @@
 }
 
 .dialogsItems {
-padding: 10px
+padding: 10px;
+    color: wheat;
 }
 
 .dialogsItems .active {
-    color: gold
+    color: blue;
+
 }
 
 .messages{
@@ -16,5 +18,5 @@ padding: 10px
 }
 
 .messages .message {
-
+    color: wheat;
 }
