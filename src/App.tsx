@@ -5,7 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {state, stateType} from "./redux/state";
+import {addPost, state, stateType} from "./redux/state";
 
 type AppPropsType = {
     state: stateType
@@ -26,7 +26,10 @@ function App(props: AppPropsType) {
                            render={()=> <Dialogs dialogsPageState= {state.dialogsPage}
 
                            />}/>
-                    <Route path='/profile' render={()=> <Profile posts={props.state.profilePage.posts}/>}/>
+                    <Route path='/profile'
+                           render={()=> <Profile posts={props.state.profilePage.posts}
+                           addPost={addPost}
+                           />}/>
                 </div>
             </div>
         </BrowserRouter>
