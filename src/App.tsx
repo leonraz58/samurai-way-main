@@ -2,15 +2,13 @@ import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {postDataType, Profile} from "./components/Profile/Profile";
+import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {dialogsDataPropsType, messagesDataPropsType} from "./index";
+import {state, stateType} from "./redux/state";
 
 type AppPropsType = {
-    posts: postDataType[]
-    dialogsData: dialogsDataPropsType[]
-    messagesData: messagesDataPropsType[]
+    state: stateType
 }
 function App(props: AppPropsType) {
 
@@ -25,11 +23,10 @@ function App(props: AppPropsType) {
                     {/*<Route path='/profile' component={Profile}/>*/}
 
                     <Route path='/dialogs'
-                           render={()=> <Dialogs dialogsData={props.dialogsData}
-                                                 messagesData={props.messagesData}
+                           render={()=> <Dialogs dialogsPageState= {state.dialogsPage}
 
                            />}/>
-                    <Route path='/profile' render={()=> <Profile posts={props.posts}/>}/>
+                    <Route path='/profile' render={()=> <Profile posts={props.state.profilePage.posts}/>}/>
                 </div>
             </div>
         </BrowserRouter>
