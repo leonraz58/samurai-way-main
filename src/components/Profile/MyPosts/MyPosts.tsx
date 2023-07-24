@@ -18,6 +18,7 @@ export const MyPosts = (props:MyPostsPropsType) => {
     const addPostHandler = () => {
         if (newPostElement.current !== null) {
             props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
 
     }
