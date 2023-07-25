@@ -3,13 +3,15 @@ import s from './Profile.module.css'
 import {Post} from "./MyPosts/Post/Post";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {postType} from "../../redux/state";
+import {postType, updateAddPostText} from "../../redux/state";
 
 
 
 type ProfilePropsType = {
     posts: postType[]
-    addPost: (newPostMessage: string) => void
+    addPost: () => void
+    newTextValue: string
+    updateAddPostText: any
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -19,6 +21,9 @@ export const Profile = (props:ProfilePropsType) => {
             <ProfileInfo/>
             <MyPosts posts={props.posts}
                     addPost={props.addPost}
+                     newTextValue={props.newTextValue}
+                     updateAddPostText={props.updateAddPostText}
+
             />
 
         </div>
