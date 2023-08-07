@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {Post} from "./MyPosts/Post/Post";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {postType, updateAddPostText} from "../../redux/state";
+import {postType} from "../../redux/state";
 
 
 
