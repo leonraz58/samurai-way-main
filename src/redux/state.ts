@@ -8,21 +8,33 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 type AddPostActionType = ReturnType<typeof addPostAC>
-
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
+type SendMessageActionType = ReturnType<typeof sendMessageAC>
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType
 
 export const addPostAC = () => {
     return {
         type: "ADD-POST"
     } as const
 }
-
 export const updateNewPostTextAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newText: text
+    } as const
+}
+
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: "SEND-MESSAGE"
     } as const
 }
 
@@ -46,7 +58,8 @@ export let store: StoreType = {
                 {id: 1, message: '1st message'},
                 {id: 2, message: '2nd message'},
                 {id: 3, message: '3rd message'},
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     _callSubscriber() {
@@ -86,6 +99,18 @@ export let store: StoreType = {
             if (action.type === "UPDATE-NEW-POST-TEXT") {
                 this._state.profilePage.newPostText = action.newText
                 this._callSubscriber()
+            } else {
+                if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+                    this._state.dialogsPage.newMessageBody = action.body
+                    this._callSubscriber()
+                } else {
+                    if (action.type === "SEND-MESSAGE") {
+                        let body = this._state.dialogsPage.newMessageBody
+                        this._state.dialogsPage.newMessageBody = ''
+                        this._state.dialogsPage.messages.push({id: 6, message: body})
+                        this._callSubscriber()
+                    }
+                }
             }
         }
     }
@@ -102,6 +127,11 @@ export type dialogsType = {
     id: number,
     name: string
 }
+export type dialogsPageType = {
+    dialogs: dialogsType[]
+    messages: messagesType[]
+    newMessageBody: string
+}
 export type messagesType = {
     id: number,
     message: string
@@ -111,10 +141,7 @@ export type RootSTateType = {
         posts: postType[]
         newPostText: string
     }
-    dialogsPage: {
-        dialogs: dialogsType[]
-        messages: messagesType[]
-    }
+    dialogsPage: dialogsPageType
 }
 
 
