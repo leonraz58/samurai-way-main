@@ -1,3 +1,6 @@
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+
 export type StoreType = {
     _state: RootSTateType
     getState: ()=>RootSTateType
@@ -86,33 +89,39 @@ export let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action) { //type 'ADD-POST'
-        if (action.type === "ADD-POST") {
-            let newPost:postType = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText=''
-            this._callSubscriber()
-        } else {
-            if (action.type === "UPDATE-NEW-POST-TEXT") {
-                this._state.profilePage.newPostText = action.newText
-                this._callSubscriber()
-            } else {
-                if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-                    this._state.dialogsPage.newMessageBody = action.body
-                    this._callSubscriber()
-                } else {
-                    if (action.type === "SEND-MESSAGE") {
-                        let body = this._state.dialogsPage.newMessageBody
-                        this._state.dialogsPage.newMessageBody = ''
-                        this._state.dialogsPage.messages.push({id: 6, message: body})
-                        this._callSubscriber()
-                    }
-                }
-            }
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+
+        this._callSubscriber()
+
+        // if (action.type === "ADD-POST") {
+        //     let newPost:postType = {
+        //         id: 4,
+        //         message: this._state.profilePage.newPostText,
+        //         likesCount: 0
+        //     }
+        //     this._state.profilePage.posts.push(newPost)
+        //     this._state.profilePage.newPostText=''
+        //     this._callSubscriber()
+        // } else {
+        //     if (action.type === "UPDATE-NEW-POST-TEXT") {
+        //         this._state.profilePage.newPostText = action.newText
+        //         this._callSubscriber()
+        //     } else {
+        //         if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+        //             this._state.dialogsPage.newMessageBody = action.body
+        //             this._callSubscriber()
+        //         } else {
+        //             if (action.type === "SEND-MESSAGE") {
+        //                 let body = this._state.dialogsPage.newMessageBody
+        //                 this._state.dialogsPage.newMessageBody = ''
+        //                 this._state.dialogsPage.messages.push({id: 6, message: body})
+        //                 this._callSubscriber()
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
 
@@ -127,20 +136,25 @@ export type dialogsType = {
     id: number,
     name: string
 }
+
+export type messagesType = {
+    id: number,
+    message: string
+}
+
 export type dialogsPageType = {
     dialogs: dialogsType[]
     messages: messagesType[]
     newMessageBody: string
 }
-export type messagesType = {
-    id: number,
-    message: string
+
+export type profilePageType = {
+    posts: postType[]
+    newPostText: string
 }
+
 export type RootSTateType = {
-    profilePage: {
-        posts: postType[]
-        newPostText: string
-    }
+    profilePage: profilePageType
     dialogsPage: dialogsPageType
 }
 
