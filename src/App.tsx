@@ -8,6 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {ActionsTypes, dialogsPageType, profilePageType, RootSTateType} from "./redux/state";
 import {AppStateType} from "./redux/redux-store";
 import {AnyAction, EmptyObject, Store} from "redux";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
@@ -27,8 +28,9 @@ function App(props: AppPropsType) {
                     {/*<Route path='/profile' component={Profile}/>*/}
 
                     <Route path='/dialogs'
-                           render={() => <Dialogs dialogsPageState={state.dialogsPage}
-                                                  dispatch={props.store.dispatch.bind(props.store)}
+                           render={() => <DialogsContainer //dialogsPageState={state.dialogsPage}
+                                                  //dispatch={props.store.dispatch.bind(props.store)}
+                                                  store={props.store}
 
                            />}/>
                     <Route path='/profile'

@@ -16,24 +16,29 @@ import {ChangeEvent} from "react";
 
 
 type DialogsPropsType = {
-    dialogsPageState: dialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    updateNewMessageBody: (body: string) => void
+    sendMessage: ()=>void
+    dialogsPage: dialogsPageType
+    //dialogsPageState: dialogsPageType
+    //dispatch: (action: ActionsTypes) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
+    let state = props.dialogsPage
 
-    let dialogsElements = props.dialogsPageState.dialogs.map(dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map(dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
 
-    let messagesElements = props.dialogsPageState.messages.map(m => <Message message={m.message}/>)
-    let newMessageBody = props.dialogsPageState.newMessageBody
+    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>)
+    let newMessageBody = props.dialogsPage.newMessageBody
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
+        props.sendMessage()
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.dispatch(updateNewMessageBodyAC(body))
+        props.updateNewMessageBody(body)
+        //props.dispatch(updateNewMessageBodyAC(body))
     }
 
     return (
