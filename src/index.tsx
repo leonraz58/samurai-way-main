@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {store} from "./redux/state";
+
 import App from "./App";
+import {store} from "./redux/redux-store";
 
 
 let rerenderEntireTree = () => {
     ReactDOM.render(
-        <App state={store.getState()}
-             dispatch={store.dispatch.bind(store)}
+        <App    store={store}
+            //state={store.getState()}
+             //dispatch={store.dispatch.bind(store)}
         />,
         document.getElementById('root')
     );

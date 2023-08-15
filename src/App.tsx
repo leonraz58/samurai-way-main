@@ -5,15 +5,17 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionsTypes, RootSTateType} from "./redux/state";
+import {ActionsTypes, dialogsPageType, profilePageType, RootSTateType} from "./redux/state";
+import {AppStateType} from "./redux/redux-store";
+import {AnyAction, EmptyObject, Store} from "redux";
 
 type AppPropsType = {
-    state: RootSTateType
-    dispatch: (action: ActionsTypes) => void
+    store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
+    //dispatch: (action: ActionsTypes) => void
 }
 
 function App(props: AppPropsType) {
-
+    const state = props.store.getState();
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -25,14 +27,14 @@ function App(props: AppPropsType) {
                     {/*<Route path='/profile' component={Profile}/>*/}
 
                     <Route path='/dialogs'
-                           render={() => <Dialogs dialogsPageState={props.state.dialogsPage}
-                                                  dispatch={props.dispatch}
+                           render={() => <Dialogs dialogsPageState={state.dialogsPage}
+                                                  dispatch={props.store.dispatch.bind(props.store)}
 
                            />}/>
                     <Route path='/profile'
-                           render={() => <Profile posts={props.state.profilePage.posts}
-                                                  newTextValue={props.state.profilePage.newPostText}
-                                                  dispatch={props.dispatch}
+                           render={() => <Profile posts={state.profilePage.posts}
+                                                  newTextValue={state.profilePage.newPostText}
+                                                  dispatch={props.store.dispatch.bind(props.store)}
 
                            />}/>
                 </div>
