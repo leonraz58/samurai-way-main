@@ -6,9 +6,12 @@ import {ActionsTypes, addPostAC, postType, updateNewPostTextAC} from "../../../r
 
 
 type MyPostsPropsType = {
+    updateAddPostText: (text: string) => void
+    addPost: ()=>void
     posts: postType[]
+
     newTextValue: string
-    dispatch: (action: ActionsTypes) => void
+    //dispatch: (action: ActionsTypes) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -16,16 +19,17 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.posts.map(el => <Post message={el.message} likesCount={el.likesCount}/>)
 
     const addPostHandler = () => {
-            //props.addPost()
-            props.dispatch(addPostAC())
+            props.addPost()
+            //props.dispatch(addPostAC())
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            //props.updateAddPostText(e.currentTarget.value)
+
         let text = e.currentTarget.value
-        let action = updateNewPostTextAC(text)
-        props.dispatch(action)
-        console.log('jjj')
+        props.updateAddPostText(e.currentTarget.value)
+        //let action = updateNewPostTextAC(text)
+        //props.dispatch(action)
+
     }
 
     return (
