@@ -11,35 +11,40 @@ import {
 } from "../../../redux/state";
 import {MyPosts} from "./MyPosts";
 import {EmptyObject, Store} from "redux";
-
+import StoreContext from "../../../StoreContext";
 
 
 type MyPostsPropsType = {
     //posts: postType[]
     //newTextValue: string
     //dispatch: (action: ActionsTypes) => void
-    store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
+    //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
 }
 export const MyPostsContainer = (props: MyPostsPropsType) => {
 
-    const addPostHandler = () => {
-            //props.addPost()
-            props.store.dispatch(addPostAC())
-    }
 
-    const onPostChange = (text: string) => {
-            //props.updateAddPostText(e.currentTarget.value)
-        //let text = e.currentTarget.value
-        let action = updateNewPostTextAC(text)
-        props.store.dispatch(action)
-
-    }
-    const state = props.store.getState()
     return (
-        <MyPosts updateAddPostText={onPostChange}
-                 addPost={addPostHandler}
-                 posts={state.profilePage.posts}
-                 newTextValue={state.profilePage.newPostText}
-        />
+        <StoreContext.Consumer>
+            {(store) => {
+                const addPostHandler = () => {
+                    //props.addPost()
+                    store.dispatch(addPostAC())
+                }
+
+                const onPostChange = (text: string) => {
+                    //props.updateAddPostText(e.currentTarget.value)
+                    //let text = e.currentTarget.value
+                    let action = updateNewPostTextAC(text)
+                    store.dispatch(action)
+
+                }
+                const state = store.getState()
+                return                <MyPosts updateAddPostText={onPostChange}
+                         addPost={addPostHandler}
+                         posts={store.getState().profilePage.posts}
+                         newTextValue={store.getState().profilePage.newPostText}
+                />
+            }}
+        </StoreContext.Consumer>
     )
 }

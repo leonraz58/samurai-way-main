@@ -15,7 +15,7 @@ type ProfilePropsType = {
     //newTextValue: string
     //updateAddPostText: any
     //dispatch: (action: ActionsTypes) => void
-    store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
+    //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -23,7 +23,7 @@ export const Profile = (props:ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer   store={props.store}
+            <MyPostsContainer   //store={props.store}
                 //posts={props.posts}
                      //newTextValue={props.newTextValue}
                         //dispatch={props.dispatch}

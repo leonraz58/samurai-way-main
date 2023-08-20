@@ -11,12 +11,11 @@ import {AnyAction, EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
-    //dispatch: (action: ActionsTypes) => void
+    //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
 }
 
 function App(props: AppPropsType) {
-    const state = props.store.getState();
+    //const state = props.store.getState();
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -30,14 +29,14 @@ function App(props: AppPropsType) {
                     <Route path='/dialogs'
                            render={() => <DialogsContainer //dialogsPageState={state.dialogsPage}
                                                   //dispatch={props.store.dispatch.bind(props.store)}
-                                                  store={props.store}
+                                                  //store={props.store}
 
                            />}/>
                     <Route path='/profile'
                            render={() => <Profile //posts={state.profilePage.posts}
                                                   //newTextValue={state.profilePage.newPostText}
                                                   //dispatch={props.store.dispatch.bind(props.store)}
-                                                    store={props.store}
+                                                    //store={props.store}
 
                            />}/>
                 </div>

@@ -12,6 +12,7 @@ import {
 import {ChangeEvent} from "react";
 import {Dialogs} from "./Dialogs";
 import {EmptyObject, Store} from "redux";
+import StoreContext from "../../StoreContext";
 
 
 
@@ -20,25 +21,30 @@ import {EmptyObject, Store} from "redux";
 type DialogsPropsType = {
     //dialogsPageState: dialogsPageType
     //dispatch: (action: ActionsTypes) => void
-    store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
+    //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
 }
 
 export const DialogsContainer = (props: DialogsPropsType) => {
 
-    let state = props.store.getState().dialogsPage
-
-    let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageAC())
-    }
-
-    let onNewMessageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyAC(body))
-    }
 
     return (
-        <Dialogs updateNewMessageBody={onNewMessageChange}
-                 sendMessage={onSendMessageClick}
-                 dialogsPage={state}
-        />
+        <StoreContext.Consumer>
+
+            {(store)=>{
+                //let state = props.store.getState().dialogsPage
+
+                let onSendMessageClick = () => {
+                    store.dispatch(sendMessageAC())
+                }
+
+                let onNewMessageChange = (body: string) => {
+                    store.dispatch(updateNewMessageBodyAC(body))
+                }
+
+                return <Dialogs updateNewMessageBody={onNewMessageChange}
+                      sendMessage={onSendMessageClick}
+                      dialogsPage={store.getState().dialogsPage}
+            />}}
+        </StoreContext.Consumer>
     )
 }
