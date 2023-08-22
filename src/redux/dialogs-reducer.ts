@@ -17,13 +17,15 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body
-            return state
+            //stateCopy.newMessageBody = action.body
+            return {...state, newMessageBody: action.body};
+            //return stateCopy
         case "SEND-MESSAGE":
             let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: 6, message: body})
-            return state
+            //stateCopy.newMessageBody = ''
+            //stateCopy.messages.push({id: 6, message: body})
+            //return stateCopy
+            return {...state, messages: [...state.messages, {id: 6, message: body}], newMessageBody: ''};
         default:
             return state
     }
