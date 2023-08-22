@@ -8,20 +8,14 @@ import {Provider} from "react-redux";
 
 
 
-let rerenderEntireTree = () => {
-    ReactDOM.render(
-        <Provider store={store}>
+ReactDOM.render(
+    <Provider store={store}>
         <App   // store={store}
             //state={store.getState()}
-             //dispatch={store.dispatch.bind(store)}
+            //dispatch={store.dispatch.bind(store)}
         />
-        </Provider>
+    </Provider>
 
-            ,
-        document.getElementById('root')
-    );
-}
-
-rerenderEntireTree();
-
-store.subscribe(rerenderEntireTree)
+    ,
+    document.getElementById('root')
+);
