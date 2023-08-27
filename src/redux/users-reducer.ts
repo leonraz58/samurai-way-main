@@ -1,10 +1,10 @@
 import {ActionsTypes, postType, profilePageType, sendMessageAC} from "./state";
 
-type UsersStateType = {
+export type UsersStateType = {
     users: UsersType[]
 }
 
-type UsersType = {
+export type UsersType = {
     id: number,
     followed: boolean
     fullName: string,
@@ -57,9 +57,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
     }
 }
 
-const followAC = (userId: number) => ({type: "FOLLOW", userId}) as const
-const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId}) as const
-const setUsersAC = (users: UsersType[]) => ({type: "SET_USERS", users}) as const
+export const followAC = (userId: number) => ({type: "FOLLOW", userId}) as const
+export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId}) as const
+export const setUsersAC = (users: UsersType[]) => ({type: "SET_USERS", users}) as const
 
 type FollowACType = ReturnType<typeof followAC>
 type UnfollowACType = ReturnType<typeof unfollowAC>

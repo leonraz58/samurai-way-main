@@ -9,6 +9,8 @@ import {ActionsTypes, dialogsPageType, profilePageType, RootSTateType} from "./r
 import {AppStateType} from "./redux/redux-store";
 import {AnyAction, EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type AppPropsType = {
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
@@ -36,7 +38,7 @@ function App(props: AppPropsType) {
                            render={() => <Profile
                            />}/>
                     <Route path='/users'
-                           render={() => <div>users</div>}/>
+                           render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

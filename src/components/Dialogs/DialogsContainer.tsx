@@ -14,37 +14,11 @@ import {Dispatch, EmptyObject, Store} from "redux";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 
-
-
-
-
 type DialogsPropsType = {
     //dialogsPageState: dialogsPageType
     //dispatch: (action: ActionsTypes) => void
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
 }
-
-// export const DialogsContainer = (props: DialogsPropsType) => {
-//     return (
-//         <StoreContext.Consumer>
-//             {(store)=>{
-//                 //let state = props.store.getState().dialogsPage
-//
-//                 let onSendMessageClick = () => {
-//                     store.dispatch(sendMessageAC())
-//                 }
-//
-//                 let onNewMessageChange = (body: string) => {
-//                     store.dispatch(updateNewMessageBodyAC(body))
-//                 }
-//
-//                 return <Dialogs updateNewMessageBody={onNewMessageChange}
-//                       sendMessage={onSendMessageClick}
-//                       dialogsPage={store.getState().dialogsPage}
-//             />}}
-//         </StoreContext.Consumer>
-//     )
-// }
 
 type MapStatePropsType = {
     dialogsPage: dialogsPageType
