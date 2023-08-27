@@ -33,12 +33,10 @@ function App(props: AppPropsType) {
 
                            />}/>
                     <Route path='/profile'
-                           render={() => <Profile //posts={state.profilePage.posts}
-                                                  //newTextValue={state.profilePage.newPostText}
-                                                  //dispatch={props.store.dispatch.bind(props.store)}
-                                                    //store={props.store}
-
+                           render={() => <Profile
                            />}/>
+                    <Route path='/users'
+                           render={() => <div>users</div>}/>
                 </div>
             </div>
         </BrowserRouter>

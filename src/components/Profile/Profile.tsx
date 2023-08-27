@@ -7,8 +7,6 @@ import {ActionsTypes, dialogsPageType, postType, profilePageType} from "../../re
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {EmptyObject, Store} from "redux";
 
-
-
 type ProfilePropsType = {
     //posts: postType[]
     //addPost: () => void
