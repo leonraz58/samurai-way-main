@@ -7,20 +7,23 @@ export type UsersStateType = {
 export type UsersType = {
     id: number,
     followed: boolean
-    fullName: string,
+    name: string,
     status: string,
-    location: {
-        city: string,
-        country: string
+    photos: {
+        small: string
     }
+    // location: {
+    //     city: string,
+    //     country: string
+    // }
 }
 
 
 const initialState = {
     users: [
-        {id: 1, followed: true, fullName: 'Dimych', status: "i am a boss!!1", location: {city: "Minsk", country: "Belarus"}},
-        {id: 2, followed: false, fullName: 'Sasha', status: "i am a boss too", location: {city: "Moscow", country: "Russia"}},
-        {id: 3, followed: true, fullName: 'Andrew', status: "i am a boss toooo", location: {city: "Kiev", country: "Ukraine"}},
+        // {id: 1, followed: true, name: 'Dimych', status: "i am a boss!!1",},
+        // {id: 2, followed: false, name: 'Sasha', status: "i am a boss too",},
+        // {id: 3, followed: true, name: 'Andrew', status: "i am a boss toooo"},
 
     ],
     newPostText: 'ololo'
