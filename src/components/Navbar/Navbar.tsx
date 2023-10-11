@@ -16,7 +16,7 @@ export const Navbar = ()=>{
                 <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/users" activeClassName={s.activeLink}>Messages</NavLink>
+                <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
             <div className={s.item}>
                 <a href="">News</a>
