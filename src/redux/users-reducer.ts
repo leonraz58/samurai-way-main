@@ -2,6 +2,9 @@ import {ActionsTypes, postType, profilePageType, sendMessageAC} from "./state";
 
 export type UsersStateType = {
     users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type UsersType = {
@@ -26,7 +29,10 @@ const initialState = {
         // {id: 3, followed: true, name: 'Andrew', status: "i am a boss toooo"},
 
     ],
-    newPostText: 'ololo'
+    //newPostText: 'ololo'
+    pageSize: 5,
+    totalUsersCount: 20,
+    currentPage: 3
 }
 export const usersReducer = (state: UsersStateType = initialState, action: UsersActionTypes):UsersStateType => {
     switch (action.type) {
@@ -53,18 +59,29 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
             }
         }
         case "SET_USERS": {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case "SET_CURRENT_PAGE": {
+            return {...state, currentPage: action.currentPage}
+        }
+        case "SET_TOTAL_USERS_COUNT": {
+            return {...state, totalUsersCount: action.count}
         }
         default:
             return state
     }
+
 }
 
 export const followAC = (userId: number) => ({type: "FOLLOW", userId}) as const
 export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId}) as const
 export const setUsersAC = (users: UsersType[]) => ({type: "SET_USERS", users}) as const
+export const setCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage}) as const
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", count: totalUsersCount}) as const
 
 type FollowACType = ReturnType<typeof followAC>
 type UnfollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
-type UsersActionTypes = FollowACType | UnfollowACType | SetUsersACType
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+type UsersActionTypes = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType

@@ -2,6 +2,7 @@ import {UsersContainerType} from "./UsersContainer";
 import axios from "axios";
 import userPhoto from '../../assets/images/user.png'
 
+
 export const Users = (props: UsersContainerType) => {
 
     const getUsers = ()=>{
@@ -12,11 +13,13 @@ export const Users = (props: UsersContainerType) => {
                 })
         }
     }
-    return <div>USERS WILL BE HERE
+    return <div>
+
+        USERS WILL BE HERE
         <button onClick={getUsers}>get</button>
         <div>{props.users.map(u=><div key={u.id}>
             <span>
-                <div><img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="" width={100}/>
+                <div><img src={u.photos.small !== null ? u.photos.small : userPhoto} alt=""/>
                     </div>
                 <div>
                     {u.followed ? <button onClick={()=>props.unfollow(u.id)}>Follow</button> :
