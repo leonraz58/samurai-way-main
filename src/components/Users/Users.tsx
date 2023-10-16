@@ -1,25 +1,42 @@
-import {UsersContainerType} from "./UsersContainer";
-import axios from "axios";
-import userPhoto from '../../assets/images/user.png'
+import styles from "./users.module.css";
+import userPhoto from "../../assets/images/user.png";
+import React from "react";
+import {UsersType} from "../../redux/users-reducer";
 
+type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number)=>void
+    users: UsersType[]
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
 
-export const Users = (props: UsersContainerType) => {
+export const Users = (props:UsersPropsType) => {
 
-    const getUsers = ()=>{
-        if (props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then((response)=> {
-                    props.setUsers(response.data.items)
-                })
-        }
+    let pagesCount = props.totalUsersCount / props.pageSize
+
+    let pages = []
+    for (let i = 1; i <= pagesCount ; i++) {
+        pages.push(i)
     }
-    return <div>
 
-        USERS WILL BE HERE
-        <button onClick={getUsers}>get</button>
+    return    <div>USERS WILL BE HERE (C)
+        {/*<button onClick={this.getUsers}>get</button>*/}
+
+        <div>
+            {pages.map(p=>{
+                return <span className={(props.currentPage === p) ? styles.selectedPage : ''}
+                             onClick={()=>{props.onPageChanged(p)}}
+                >{p} </span>
+            })}
+        </div>
+
+
         <div>{props.users.map(u=><div key={u.id}>
             <span>
-                <div><img src={u.photos.small !== null ? u.photos.small : userPhoto} alt=""/>
+                <div><img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="" width={100}/>
                     </div>
                 <div>
                     {u.followed ? <button onClick={()=>props.unfollow(u.id)}>Follow</button> :

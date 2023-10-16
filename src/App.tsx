@@ -9,7 +9,7 @@ import {ActionsTypes, dialogsPageType, profilePageType, RootSTateType} from "./r
 import {AppStateType} from "./redux/redux-store";
 import {AnyAction, EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {Users} from "./components/Users/Users";
+import {UsersUnused} from "./components/Users/UsersUnused";
 import UsersContainer from "./components/Users/UsersContainer";
 
 type AppPropsType = {
