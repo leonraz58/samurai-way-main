@@ -31,18 +31,7 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
     }
 }
 
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    } as const
-}
 
-export const sendMessageAC = () => {
-    return {
-        type: "SEND-MESSAGE"
-    } as const
-}
 
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-type SendMessageActionType = ReturnType<typeof sendMessageAC>
+
+

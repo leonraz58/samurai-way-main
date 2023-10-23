@@ -11,6 +11,7 @@ import {AnyAction, EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersUnused} from "./components/Users/UsersUnused";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 type AppPropsType = {
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
@@ -35,7 +36,7 @@ function App(props: AppPropsType) {
 
                            />}/>
                     <Route path='/profile'
-                           render={() => <Profile
+                           render={() => <ProfileContainer
                            />}/>
                     <Route path='/users'
                            render={() => <UsersContainer/>}/>

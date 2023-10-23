@@ -1,4 +1,4 @@
-import {ActionsTypes, postType, profilePageType} from "./state";
+import {ActionsTypes, postType, profilePageType, sendMessageAC, SetUserProfileACType} from "./state";
 
 const initialState = {
     posts: [
@@ -6,7 +6,8 @@ const initialState = {
         {id: 2, message: 'Andrew', likesCount: 4},
         {id: 3, message: 'Vasya', likesCount: 2},
     ],
-    newPostText: 'ololo'
+    newPostText: 'ololo',
+    profile: null
 }
 export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes):profilePageType => {
     switch (action.type) {
@@ -24,7 +25,31 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
             stateCopy.newPostText = action.newText
             return stateCopy
         }
+        case "SET-USER-PROFILE": {
+            return {...state, profile: action.profile}
+        }
         default:
             return state
     }
 }
+
+export type UserProfileType = {
+    userId: number;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    contacts: {
+        github: string;
+        vk: string;
+        facebook: string;
+        instagram: string;
+        twitter: string;
+        website: string;
+        youtube: string;
+    };
+    photos: {
+        small: string | undefined;
+        large: string | undefined;
+    };
+}
+

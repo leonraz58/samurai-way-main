@@ -6,6 +6,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ActionsTypes, dialogsPageType, postType, profilePageType} from "../../redux/state";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {EmptyObject, Store} from "redux";
+import {UserProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     //posts: postType[]
@@ -14,13 +15,14 @@ type ProfilePropsType = {
     //updateAddPostText: any
     //dispatch: (action: ActionsTypes) => void
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
+    profile: UserProfileType
 }
 
 export const Profile = (props:ProfilePropsType) => {
-
+    console.log(props)
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer   //store={props.store}
                 //posts={props.posts}
                      //newTextValue={props.newTextValue}
