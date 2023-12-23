@@ -7,7 +7,23 @@ const initialState = {
         {id: 3, message: 'Vasya', likesCount: 2},
     ],
     newPostText: 'ololo',
-    profile: null
+    profile: {   userId: 2,
+        lookingForAJob: true,
+        lookingForAJobDescription: 'lookingForAJobDescription',
+        fullName: 'fullName',
+        contacts: {
+            github: 'github',
+            vk: 'vk',
+            facebook: 'facebook',
+            instagram: 'instagram',
+            twitter: 'twitter',
+            website: 'website',
+            youtube: 'youtube',
+        },
+        photos: {
+            small: undefined,
+            large: undefined,
+        }}
 }
 export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes):profilePageType => {
     switch (action.type) {

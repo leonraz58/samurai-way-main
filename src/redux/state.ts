@@ -73,7 +73,7 @@ export type dialogsPageType = {
 export type profilePageType = {
     posts: postType[]
     newPostText: string
-    profile: UserProfileType | null
+    profile: UserProfileType
 }
 
 

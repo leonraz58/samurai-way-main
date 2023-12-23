@@ -35,7 +35,7 @@ function App(props: AppPropsType) {
                                                   //store={props.store}
 
                            />}/>
-                    <Route path='/profile'
+                    <Route path='/profile/:userId?'
                            render={() => <ProfileContainer
                            />}/>
                     <Route path='/users'
