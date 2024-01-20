@@ -10,7 +10,7 @@ import {AppStateType} from "./redux/redux-store";
 import {AnyAction, EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersUnused} from "./components/Users/UsersUnused";
-import UsersContainer from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainerUnused";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 

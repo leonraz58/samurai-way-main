@@ -1,4 +1,4 @@
-import {UsersContainerType} from "./UsersContainer";
+import {UsersContainerType} from "./UsersContainerUnused";
 import axios from "axios";
 import userPhoto from '../../assets/images/user.png'
 
