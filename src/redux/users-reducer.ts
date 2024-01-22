@@ -1,4 +1,3 @@
-import {ActionsTypes, postType, profilePageType, sendMessageAC} from "./state";
 
 export type UsersStateType = {
     users: UsersType[]
@@ -6,6 +5,7 @@ export type UsersStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean;
+    followingInProgress: number[]
 }
 
 export type UsersType = {
@@ -34,7 +34,8 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 20,
     currentPage: 3,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 export const usersReducer = (state: UsersStateType = initialState, action: UsersActionTypes):UsersStateType => {
     switch (action.type) {
@@ -72,6 +73,12 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
         case "TOGGLE_IS_FETCHING": {
             return {...state, isFetching: action.isFetching}
         }
+        case "TOGGLE_IS_FOLLOWING_PROGRESS": {
+            return {...state,
+                followingInProgress: action.isFetching
+            ? [...state.followingInProgress, action.userId]
+            : state.followingInProgress.filter(id => id !== action.userId)}
+        }
         default:
             return state
     }
@@ -84,6 +91,7 @@ export const setUsersAC = (users: UsersType[]) => ({type: "SET_USERS", users}) a
 export const setCurrentPageAC = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage}) as const
 export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT", count: totalUsersCount}) as const
 export const setIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE_IS_FETCHING", isFetching: isFetching}) as const
+export const toggleFollowingProgressAC = (isFetching: boolean, userId: number) => ({type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId}) as const
 
 type FollowACType = ReturnType<typeof followAC>
 type UnfollowACType = ReturnType<typeof unfollowAC>
@@ -91,4 +99,5 @@ type SetUsersACType = ReturnType<typeof setUsersAC>
 type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
 type SetIsFetchingType = ReturnType<typeof setIsFetchingAC>
-type UsersActionTypes = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingType
+type SetToggleFollowingProgress = ReturnType<typeof toggleFollowingProgressAC>
+type UsersActionTypes = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingType | SetToggleFollowingProgress

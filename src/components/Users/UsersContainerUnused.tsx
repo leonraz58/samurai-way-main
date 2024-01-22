@@ -3,7 +3,7 @@ import {
     followAC,
     setCurrentPageAC, setIsFetchingAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleFollowingProgressAC,
     unfollowAC,
     UsersType
 } from "../../redux/users-reducer";
@@ -43,7 +43,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
-        dispatch(followAC(userId))
+            dispatch(followAC(userId))
         },
         unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
@@ -70,6 +70,7 @@ export default connect(mapStateToProps,
         setUsers: setUsersAC,
         setCurrentPage: setCurrentPageAC,
         setTotalUsersCount: setTotalUsersCountAC,
-        toggleIsFetching: setIsFetchingAC
-        }
-    )(UsersContainer)
+        toggleIsFetching: setIsFetchingAC,
+
+    }
+)(UsersContainer)

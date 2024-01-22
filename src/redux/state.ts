@@ -1,5 +1,5 @@
 import {profileReducer, UserProfileType} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+
 
 export type StoreType = {
     _state: RootSTateType
