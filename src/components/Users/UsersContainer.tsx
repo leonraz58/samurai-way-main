@@ -5,11 +5,11 @@ import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {usersAPI} from "../../api/api";
 import {
-    followAC,
+    followAC, followTC, getUsersThunkCreator,
     setCurrentPageAC, setIsFetchingAC,
     setTotalUsersCountAC,
     setUsersAC, toggleFollowingProgressAC,
-    unfollowAC,
+    unfollowAC, unfollowTC,
     UsersType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
@@ -17,25 +17,27 @@ import {connect} from "react-redux";
 
 class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        if (this.props.users.length === 0) {
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-                .then((data) => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(data.items)
-                    this.props.setTotalUsersCount(data.totalCount)
-                })
-        }
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+        // this.props.toggleIsFetching(true)
+        // if (this.props.users.length === 0) {
+        //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        //         .then((data) => {
+        //             this.props.toggleIsFetching(false)
+        //             this.props.setUsers(data.items)
+        //             this.props.setTotalUsersCount(data.totalCount)
+        //         })
+        //}
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then((data) => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize)
+        // this.props.toggleIsFetching(true)
+        // this.props.setCurrentPage(pageNumber)
+        // usersAPI.getUsers(pageNumber, this.props.pageSize)
+        //     .then((data) => {
+        //         this.props.toggleIsFetching(false)
+        //         this.props.setUsers(data.items)
+        //     })
     }
 
     render() {
@@ -50,6 +52,9 @@ class UsersContainer extends React.Component<UsersContainerType> {
                    unfollow={this.props.unfollow}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
+                   followTC={this.props.followTC}
+                   unfollowTC={this.props.unfollowTC}
+
             />
         </>
     }
@@ -69,11 +74,14 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: UsersType[]) => void
+    //setUsers: (users: UsersType[]) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
+    //setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    getUsersThunkCreator: (pageSize: number, currentPage: number) => void
+    followTC: (userId: number) => void
+    unfollowTC: (userId: number) => void
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -90,10 +98,13 @@ export default connect(mapStateToProps,
     {
         follow: followAC,
         unfollow: unfollowAC,
-        setUsers: setUsersAC,
+        //setUsers: setUsersAC,
         setCurrentPage: setCurrentPageAC,
-        setTotalUsersCount: setTotalUsersCountAC,
+        //setTotalUsersCount: setTotalUsersCountAC,
         toggleIsFetching: setIsFetchingAC,
-        toggleFollowingProgress: toggleFollowingProgressAC
+        toggleFollowingProgress: toggleFollowingProgressAC,
+        getUsersThunkCreator,
+        followTC,
+        unfollowTC
     }
 )(UsersContainer)
