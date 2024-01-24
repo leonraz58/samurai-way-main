@@ -1,4 +1,6 @@
-import {ActionsTypes, postType, profilePageType, sendMessageAC, SetUserProfileACType} from "./state";
+import {postType, profilePageType} from "./state";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const initialState = {
     posts: [
@@ -68,4 +70,37 @@ export type UserProfileType = {
         large: string | undefined;
     };
 }
+
+export const addPostAC = () => {
+    return {
+        type: "ADD-POST"
+    } as const
+}
+
+type AddPostActionType = ReturnType<typeof addPostAC>
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileACType
+
+
+export const updateNewPostTextAC = (text: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: text
+    } as const
+}
+export const setUserProfileAC = (profile: UserProfileType) => {
+    return {
+        type: "SET-USER-PROFILE", profile
+    } as const
+}
+
+export type SetUserProfileACType = ReturnType<typeof setUserProfileAC>
+export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then((response)=> {
+            dispatch(setUserProfileAC(response.data))
+        })
+}
+
 

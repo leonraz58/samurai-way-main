@@ -3,7 +3,6 @@ import s from './Profile.module.css'
 import {Post} from "./MyPosts/Post/Post";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes, dialogsPageType, postType, profilePageType} from "../../redux/state";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {EmptyObject, Store} from "redux";
 import {UserProfileType} from "../../redux/profile-reducer";

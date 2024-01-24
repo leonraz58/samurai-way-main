@@ -2,17 +2,18 @@ import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {
-    ActionsTypes,
+
     dialogsPageType,
     dialogsType,
     messagesType, profilePageType,
-    sendMessageAC,
-    updateNewMessageBodyAC
+
+
 } from "../../redux/state";
 import {Dialogs} from "./Dialogs";
 import {Dispatch, EmptyObject, Store} from "redux";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     //dialogsPageState: dialogsPageType

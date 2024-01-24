@@ -2,12 +2,12 @@ import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {
-    ActionsTypes,
+
     dialogsPageType,
     dialogsType,
     messagesType,
-    sendMessageAC,
-    updateNewMessageBodyAC
+
+
 } from "../../redux/state";
 import {ChangeEvent} from "react";
 

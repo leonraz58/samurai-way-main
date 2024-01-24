@@ -1,4 +1,4 @@
-import {ActionsTypes, dialogsPageType, dialogsType, postType} from "./state";
+import {dialogsPageType, dialogsType, postType} from "./state";
 
 const initialState = {
     dialogs: [
@@ -31,7 +31,22 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
     }
 }
 
+export const sendMessageAC = () => {
+    return {
+        type: "SEND-MESSAGE"
+    } as const
+}
 
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    } as const
+}
 
+type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
+type SendMessageActionType = ReturnType<typeof sendMessageAC>
+
+type ActionsTypes = UpdateNewMessageBodyActionType | SendMessageActionType
 
 

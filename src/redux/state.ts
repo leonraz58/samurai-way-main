@@ -1,53 +1,18 @@
-import {profileReducer, UserProfileType} from "./profile-reducer";
+import {UserProfileType} from "./profile-reducer";
 
 
-export type StoreType = {
-    _state: RootSTateType
-    getState: ()=>RootSTateType
-    _callSubscriber: ()=>void
-    addPost: ()=>void
-    updateAddPostText:(newText:string)=>void
-    subscribe: (observer: ()=>void) => void
-    dispatch: (action: ActionsTypes) => void
-}
-type AddPostActionType = ReturnType<typeof addPostAC>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-type SendMessageActionType = ReturnType<typeof sendMessageAC>
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType | SetUserProfileACType
+// export type StoreType = {
+//     _state: RootSTateType
+//     getState: ()=>RootSTateType
+//     _callSubscriber: ()=>void
+//     addPost: ()=>void
+//     updateAddPostText:(newText:string)=>void
+//     subscribe: (observer: ()=>void) => void
+//     dispatch: (action: ActionsTypes) => void
+// }
 
-export const addPostAC = () => {
-    return {
-        type: "ADD-POST"
-    } as const
-}
-export const updateNewPostTextAC = (text: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: text
-    } as const
-}
 
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    } as const
-}
 
-export const sendMessageAC = () => {
-    return {
-        type: "SEND-MESSAGE"
-    } as const
-}
-
-export const setUserProfileAC = (profile: UserProfileType) => {
-    return {
-        type: "SET-USER-PROFILE", profile
-    } as const
-}
-
-export type SetUserProfileACType = ReturnType<typeof setUserProfileAC>
 
 export type postType = {
     id: number

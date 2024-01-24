@@ -1,16 +1,17 @@
 import s from './MyPosts.module.css'
 import {
-    ActionsTypes,
-    addPostAC,
+
+
     dialogsPageType,
     postType,
     profilePageType,
-    updateNewPostTextAC
+
 } from "../../../redux/state";
 import {MyPosts} from "./MyPosts";
 import {Dispatch, EmptyObject, Store} from "redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 
 type MyPostsPropsType = {
