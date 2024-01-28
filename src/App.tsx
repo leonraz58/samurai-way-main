@@ -9,6 +9,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainerUnused";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 type AppPropsType = {
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,//AppStateType //RootSTateType
@@ -37,6 +38,9 @@ function App(props: AppPropsType) {
                            />}/>
                     <Route path='/users'
                            render={() => <UsersContainer/>}/>
+                    <Route path='/login'
+                           render={() => <Login/>}/>
+
                 </div>
             </div>
         </BrowserRouter>

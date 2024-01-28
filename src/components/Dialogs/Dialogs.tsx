@@ -10,6 +10,7 @@ import {
 
 } from "../../redux/state";
 import {ChangeEvent} from "react";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -19,6 +20,7 @@ type DialogsPropsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: ()=>void
     dialogsPage: dialogsPageType
+    isAuth: boolean
     //dialogsPageState: dialogsPageType
     //dispatch: (action: ActionsTypes) => void
 }
@@ -39,6 +41,11 @@ export const Dialogs = (props: DialogsPropsType) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
         //props.dispatch(updateNewMessageBodyAC(body))
+    }
+
+    alert(props.isAuth)
+    if (props.isAuth === false) {
+        return <Redirect to={'/login'}/>
     }
 
     return (
