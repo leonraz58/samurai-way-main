@@ -3,21 +3,22 @@ import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {getUserProfileTC, UserProfileType} from "../../redux/profile-reducer";
 import {usersAPI} from "../../api/api";
 
 type PathParamsType = {
-    userId:string
+    userId: string
 }
 
 type MapStateToPropsType = {
-    profile:UserProfileType
+    profile: UserProfileType
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
-    getUserProfileTC:(userId: string)=>void
+    getUserProfileTC: (userId: string) => void
 }
-type PropsType =  RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
+type PropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
 
@@ -36,16 +37,20 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         console.log(this.props.profile)
+        if (this.props.isAuth === false) return <Redirect to={'login'}/>
         return (
-            <Profile profile = {this.props.profile}/>
-            )
+            <Profile profile={this.props.profile}
+                     isAuth={this.props.isAuth}
+            />
+        )
     }
 }
 
-let mapStateToProps = (state: AppStateType):MapStateToPropsType => ({
-    profile: state.profilePage.profile
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {getUserProfileTC}) (WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {getUserProfileTC})(WithUrlDataContainerComponent)

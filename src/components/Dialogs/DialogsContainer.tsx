@@ -23,10 +23,12 @@ type DialogsPropsType = {
 
 type MapStatePropsType = {
     dialogsPage: dialogsPageType
+    isAuth: boolean
 }
 let mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
