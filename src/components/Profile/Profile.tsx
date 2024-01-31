@@ -15,10 +15,11 @@ type ProfilePropsType = {
     //dispatch: (action: ActionsTypes) => void
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
     profile: UserProfileType
-    isAuth: boolean
+    //isAuth: boolean
 }
 
 export const Profile = (props:ProfilePropsType) => {
+    debugger
     console.log(props)
     return (
         <div>
