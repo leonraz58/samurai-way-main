@@ -14,6 +14,10 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import {getUserProfileTC} from "../../redux/profile-reducer";
+import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
@@ -94,17 +98,35 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-export default connect(mapStateToProps,
-    {
-        follow: followAC,
-        unfollow: unfollowAC,
-        //setUsers: setUsersAC,
-        setCurrentPage: setCurrentPageAC,
-        //setTotalUsersCount: setTotalUsersCountAC,
-        toggleIsFetching: setIsFetchingAC,
-        toggleFollowingProgress: toggleFollowingProgressAC,
-        getUsersThunkCreator,
-        followTC,
-        unfollowTC
-    }
+// export default connect(mapStateToProps,
+//     {
+//         follow: followAC,
+//         unfollow: unfollowAC,
+//         //setUsers: setUsersAC,
+//         setCurrentPage: setCurrentPageAC,
+//         //setTotalUsersCount: setTotalUsersCountAC,
+//         toggleIsFetching: setIsFetchingAC,
+//         toggleFollowingProgress: toggleFollowingProgressAC,
+//         getUsersThunkCreator,
+//         followTC,
+//         unfollowTC
+//     }
+// )(UsersContainer)
+
+export default compose<React.ComponentType>(connect(mapStateToProps,
+        {
+            follow: followAC,
+            unfollow: unfollowAC,
+            //setUsers: setUsersAC,
+            setCurrentPage: setCurrentPageAC,
+            //setTotalUsersCount: setTotalUsersCountAC,
+            toggleIsFetching: setIsFetchingAC,
+            toggleFollowingProgress: toggleFollowingProgressAC,
+            getUsersThunkCreator,
+            followTC,
+            unfollowTC
+        }
+    ),
+    withRouter,
+    withAuthRedirect
 )(UsersContainer)
