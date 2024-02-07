@@ -1,10 +1,12 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
-import {UserProfileType} from "../../../redux/profile-reducer";
+import {updateStatusTC, UserProfileType} from "../../../redux/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
 
 type PropsType = {
     profile: UserProfileType
+    status: string
+    updateStatusTC: (status: string) => void
 }
 export const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
@@ -21,7 +23,9 @@ export const ProfileInfo = (props: PropsType) => {
                     avatar+description
                     <div>{props.profile.fullName}</div>
                     <img src={props.profile.photos.large} alt=""/>
-                    <div><ProfileStatus status={'This is my status'}/></div>
+                    <div><ProfileStatus status={props.status}
+                                        updateStatusTC={props.updateStatusTC}
+                    /></div>
                 </div>
 
             </div>

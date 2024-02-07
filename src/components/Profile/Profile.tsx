@@ -16,14 +16,16 @@ type ProfilePropsType = {
     //store: Store<EmptyObject & { dialogsPage: dialogsPageType; profilePage: profilePageType }, ActionsTypes>,
     profile: UserProfileType
     //isAuth: boolean
+    status: string
+    updateStatusTC: (status: string) => void
 }
 
 export const Profile = (props:ProfilePropsType) => {
-    debugger
+    //debugger
     console.log(props)
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}/>
             <MyPostsContainer   //store={props.store}
                 //posts={props.posts}
                      //newTextValue={props.newTextValue}

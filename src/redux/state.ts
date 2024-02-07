@@ -1,19 +1,6 @@
 import {UserProfileType} from "./profile-reducer";
 
 
-// export type StoreType = {
-//     _state: RootSTateType
-//     getState: ()=>RootSTateType
-//     _callSubscriber: ()=>void
-//     addPost: ()=>void
-//     updateAddPostText:(newText:string)=>void
-//     subscribe: (observer: ()=>void) => void
-//     dispatch: (action: ActionsTypes) => void
-// }
-
-
-
-
 export type postType = {
     id: number
     message: string
@@ -39,6 +26,7 @@ export type profilePageType = {
     posts: postType[]
     newPostText: string
     profile: UserProfileType
+    status: string
 }
 
 
