@@ -22,7 +22,7 @@ type ProfilePropsType = {
 
 export const Profile = (props:ProfilePropsType) => {
     //debugger
-    console.log(props)
+    //console.log(props)
     return (
         <div>
             <ProfileInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC}/>

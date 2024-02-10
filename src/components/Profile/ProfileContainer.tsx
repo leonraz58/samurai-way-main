@@ -36,7 +36,7 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        console.log(this.props.profile)
+        //console.log('status in the profilecontainer - ' + this.props.status)
         // if (this.props.isAuth === false) return <Redirect to={'login'}/>
         return (
             <Profile profile={this.props.profile}
