@@ -19,12 +19,11 @@ export type messagesType = {
 export type dialogsPageType = {
     dialogs: dialogsType[]
     messages: messagesType[]
-    newMessageBody: string
+    //newMessageBody: string
 }
 
 export type profilePageType = {
     posts: postType[]
-    newPostText: string
     profile: UserProfileType
     status: string
 }

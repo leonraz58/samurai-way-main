@@ -37,18 +37,18 @@ let mapStateToProps = (state: AppStateType):MapStatePropsType => {
 }
 
 type MapDispatchPropsType = {
-    updateNewMessageBody: (body: string) => void,
-    sendMessage: () => void
+   // updateNewMessageBody: (body: string) => void,
+    sendMessage: (newMessageBody: string) => void
 }
 
 export type DialogsContainerType = MapDispatchPropsType & MapStatePropsType
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        updateNewMessageBody: (body: string) => {
-            dispatch(updateNewMessageBodyAC(body))
-        },
-        sendMessage: () => {
-            dispatch(sendMessageAC())
+        // updateNewMessageBody: (body: string) => {
+        //     dispatch(updateNewMessageBodyAC(body))
+        // },
+        sendMessage: (newMessageBody) => {
+            dispatch(sendMessageAC(newMessageBody))
         }
 
     }

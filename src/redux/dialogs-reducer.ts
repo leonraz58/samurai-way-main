@@ -10,30 +10,30 @@ const initialState = {
     {id: 1, message: '1st message'},
     {id: 2, message: '2nd message'},
     {id: 3, message: '3rd message'},
-],
-    newMessageBody: ''
+]
 }
 export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsTypes):dialogsPageType => {
 
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
+        //case "UPDATE-NEW-MESSAGE-BODY":
             //stateCopy.newMessageBody = action.body
-            return {...state, newMessageBody: action.body};
+         //   return {...state, newMessageBody: action.body};
             //return stateCopy
+
         case "SEND-MESSAGE":
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             //stateCopy.newMessageBody = ''
             //stateCopy.messages.push({id: 6, message: body})
             //return stateCopy
-            return {...state, messages: [...state.messages, {id: 6, message: body}], newMessageBody: ''};
+            return {...state, messages: [...state.messages, {id: 6, message: body}]};
         default:
             return state
     }
 }
 
-export const sendMessageAC = () => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
-        type: "SEND-MESSAGE"
+        type: "SEND-MESSAGE", newMessageBody
     } as const
 }
 
@@ -44,9 +44,11 @@ export const updateNewMessageBodyAC = (body: string) => {
     } as const
 }
 
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
+//type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
-type ActionsTypes = UpdateNewMessageBodyActionType | SendMessageActionType
+type ActionsTypes =
+    //UpdateNewMessageBodyActionType
+    | SendMessageActionType
 
 
