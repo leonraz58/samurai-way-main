@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
-import {Input} from "../common/preloader/FormsControls/FormsControls";
+import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 
 type FormDataType = {

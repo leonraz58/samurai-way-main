@@ -12,7 +12,7 @@ import {
 import React, {ChangeEvent} from "react";
 import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../common/preloader/FormsControls/FormsControls";
+import {Textarea} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 
