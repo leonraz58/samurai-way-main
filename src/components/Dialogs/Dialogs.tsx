@@ -12,6 +12,8 @@ import {
 import React, {ChangeEvent} from "react";
 import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../common/preloader/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 
 type DialogsPropsType = {
@@ -69,11 +71,15 @@ type AddMessageFormDataType = {
     newMessageBody: string
 }
 
+const maxLength50 = maxLengthCreator(50)
+
 const AddMessageForm:React.FC<InjectedFormProps<AddMessageFormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component="textarea" name="newMessageBody" placeholder="Enter your message"/>
+                <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
+                validate={[required, maxLength50]}
+                />
                 {/*<textarea*/}
                 {/*    value={newMessageBody}*/}
                 {/*    placeholder={"Enter your message"}*/}
