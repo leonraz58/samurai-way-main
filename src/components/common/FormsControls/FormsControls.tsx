@@ -2,7 +2,6 @@ import {inspect} from "util";
 import styles from "./FormsControls.module.css"
 
 export const FormControl = ({input, meta, child, ...props}: any) => {
-    //debugger
     const hasError = meta.touched && meta.error
     return (
         <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
