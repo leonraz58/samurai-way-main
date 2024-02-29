@@ -36,7 +36,7 @@ export const setUserData = (userId: string | null, email: string | null, login: 
 export const setAuth = (value:boolean) => ({type: "SET_AUTH", value}) as const
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then((res) => {
             let {id, email, login} = res.data.data
             dispatch(setUserData(id, email, login, true))
