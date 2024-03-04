@@ -7,7 +7,6 @@ type ProfileStatusType = {
 
 export const ProfileStatus = (props: ProfileStatusType) => {
 
-
     console.log('props.status - ' + props.status)
     const [editMode, setEditMode] = useState(false)
     const [status, setStatus] = useState(props.status)
@@ -28,10 +27,10 @@ export const ProfileStatus = (props: ProfileStatusType) => {
     return (
         <div>
             {!editMode && <div>
-                <span onClick={activateEditMode}>{status || '-----'}</span>
+                <span onDoubleClick={activateEditMode}>{status || '-----'}</span>
             </div>}
             {editMode && <div>
-                <input onClick={deactivateEditMode} autoFocus={true} value={status}
+                <input onBlur={deactivateEditMode} autoFocus={true} value={status}
                 onChange={onStatusChange}
                 />
             </div>}
