@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {updateObjectInArray} from "../utils/object-helpers";
 
 export type UsersStateType = {
     users: UsersType[]
@@ -42,25 +43,34 @@ const initialState = {
 export const usersReducer = (state: UsersStateType = initialState, action: UsersActionTypes):UsersStateType => {
     switch (action.type) {
         case "FOLLOW": {
+            // return {
+            //     ...state,
+            //     users: state.users.map(u=>{
+            //         if (u.id === action.userId) {
+            //             return {...u, followed: true}
+            //         }
+            //         return u
+            //     })
+            // }
             return {
                 ...state,
-                users: state.users.map(u=>{
-                    if (u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: true})
             }
+
         }
         case "UNFOLLOW": {
+            // return {
+            //     ...state,
+            //     users: state.users.map(u=>{
+            //         if (u.id === action.userId) {
+            //             return {...u, followed: false}
+            //         }
+            //         return u
+            //     })
+            // }
             return {
                 ...state,
-                users: state.users.map(u=>{
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: false})
             }
         }
         case "SET_USERS": {
@@ -105,43 +115,36 @@ type SetToggleFollowingProgress = ReturnType<typeof toggleFollowingProgressAC>
 type UsersActionTypes = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingType | SetToggleFollowingProgress
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(setIsFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        let data = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
-        })
     }
 }
 
 export const followTC = (userId: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgressAC(true, userId))
-        usersAPI.follow(userId)
-            .then((response) => {
+        let response = await usersAPI.follow(userId)
                 if (response.data.resultCode === 0) {
                     console.log(response.data.resultCode)
                     dispatch(followAC(userId))
                 }
                 dispatch(toggleFollowingProgressAC(false, userId))
-
-            })
     }
 }
 
 export const unfollowTC = (userId: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgressAC(true, userId))
-        usersAPI.unfollow(userId)
-            .then((response) => {
+        let response = await usersAPI.unfollow(userId)
                 if (response.data.resultCode === 0) {
                     console.log(response.data.resultCode)
                     dispatch(unfollowAC(userId))
                 }
                 dispatch(toggleFollowingProgressAC(false, userId))
-
-            })
     }
 }
