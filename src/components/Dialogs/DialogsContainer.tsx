@@ -19,6 +19,8 @@ import {getUserProfileTC} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
+
+
 type DialogsPropsType = {
     //dialogsPageState: dialogsPageType
     //dispatch: (action: ActionsTypes) => void
@@ -56,7 +58,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 
 //export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
-export const DialogsContainer = compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),
     withRouter,
     withAuthRedirect
 )(Dialogs)
