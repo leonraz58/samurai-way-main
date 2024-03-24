@@ -52,6 +52,9 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
         case "DELETE-POST": {
             return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         }
+        case "SAVE_PHOTO_SUCCESS": {
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state
     }
@@ -91,13 +94,26 @@ export const deletePostAC = (id: number) => {
     } as const
 }
 
+export type PhotosType ={
+    small: string, large: string
+}
+
+export const savePhotoSuccess = (photos: PhotosType) => {
+    return {
+        type: "SAVE_PHOTO_SUCCESS",
+        photos
+    } as const
+}
+
+type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
+
 type AddPostActionType = ReturnType<typeof addPostAC>
 //type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 type DeletePostActionType = ReturnType<typeof deletePostAC>
 
 export type ActionsTypes = AddPostActionType
     //| UpdateNewPostTextActionType
-    | SetUserProfileACType | SetStatusACType | DeletePostActionType
+    | SetUserProfileACType | SetStatusACType | DeletePostActionType | SavePhotoSuccessType
 
 
 // export const updateNewPostTextAC = (text: string) => {
@@ -147,4 +163,13 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
                 dispatch(setStatusAC(status))
             }
         })
+}
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    let res = await profileAPI.savePhoto(file)
+
+            if (res.data.resultCode === 0 ){
+                dispatch(savePhotoSuccess(res.data.data.photos))
+            }
+
 }
