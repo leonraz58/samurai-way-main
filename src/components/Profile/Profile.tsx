@@ -20,6 +20,7 @@ type ProfilePropsType = {
     updateStatusTC: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
+    saveProfile: any
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -27,7 +28,13 @@ export const Profile = (props:ProfilePropsType) => {
     //console.log(props)
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC} isOwner={props.isOwner} savePhoto={props.savePhoto}/>
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         updateStatusTC={props.updateStatusTC}
+                         isOwner={props.isOwner}
+                         savePhoto={props.savePhoto}
+                saveProfile={props.saveProfile}
+            />
             <MyPostsContainer   //store={props.store}
                 //posts={props.posts}
                      //newTextValue={props.newTextValue}

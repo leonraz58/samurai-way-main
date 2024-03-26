@@ -25,7 +25,9 @@ test('length of posts should be incremented', () => {
             photos: {
                 small: undefined,
                 large: undefined,
-            }},
+            },
+            aboutMe: 'no info yet'
+        },
         status: ''
     }
     //2. action
@@ -61,7 +63,9 @@ test('after deleting length of messages should decrement', () => {
             photos: {
                 small: undefined,
                 large: undefined,
-            }},
+            },
+            aboutMe: 'no info yet'
+        },
         status: ''
     }
     //2. action
@@ -97,7 +101,9 @@ test('1', () => {
             photos: {
                 small: undefined,
                 large: undefined,
-            }},
+            },
+            aboutMe: 'no info yet'
+        },
         status: ''
     }
     //2. action

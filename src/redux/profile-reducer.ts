@@ -1,6 +1,8 @@
 import {postType, profilePageType} from "./state";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {AppStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 const initialState = {
     posts: [
@@ -8,7 +10,8 @@ const initialState = {
         {id: 2, message: 'Andrew', likesCount: 4},
         {id: 3, message: 'Vasya', likesCount: 2},
     ],
-    profile: {   userId: 2,
+    profile: {
+        userId: 2,
         lookingForAJob: true,
         lookingForAJobDescription: 'lookingForAJobDescription',
         fullName: 'fullName',
@@ -24,10 +27,12 @@ const initialState = {
         photos: {
             small: undefined,
             large: undefined,
-        }},
+        },
+        aboutMe: 'no info yet',
+    },
     status: ''
 }
-export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes):profilePageType => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes): profilePageType => {
     switch (action.type) {
         case "ADD-POST": {
             let newPost: postType = {
@@ -36,7 +41,7 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 likesCount: 0
             }
 
-            return {...state, posts:[newPost,...state.posts]};
+            return {...state, posts: [newPost, ...state.posts]};
         }
         // case "UPDATE-NEW-POST-TEXT": {
         //     let stateCopy = {...state}
@@ -77,7 +82,8 @@ export type UserProfileType = {
     photos: {
         small: string | undefined;
         large: string | undefined;
-    };
+    },
+    aboutMe: string;
 }
 
 export const addPostAC = (newPostText: string) => {
@@ -94,7 +100,7 @@ export const deletePostAC = (id: number) => {
     } as const
 }
 
-export type PhotosType ={
+export type PhotosType = {
     small: string, large: string
 }
 
@@ -140,14 +146,14 @@ type SetStatusACType = ReturnType<typeof setStatusAC>
 export type SetUserProfileACType = ReturnType<typeof setUserProfileAC>
 export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId)
-        .then((response)=> {
+        .then((response) => {
             dispatch(setUserProfileAC(response.data))
         })
 }
 
 export const getStatusTC = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
-        .then((response)=> {
+        .then((response) => {
             dispatch(setStatusAC(response.data))
         })
 }
@@ -155,8 +161,8 @@ export const getStatusTC = (userId: string) => (dispatch: Dispatch) => {
 export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
     console.log('updateStatusTC')
     profileAPI.updateStatus(status)
-        .then((response)=> {
-            if (response.data.resultCode === 0 ){
+        .then((response) => {
+            if (response.data.resultCode === 0) {
                 //debugger
                 console.log('dispatch(setStatusAC(response.data.message)) ' + response.data)
                 //dispatch(setStatusAC(response.data.message))
@@ -167,9 +173,23 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
 
 export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     let res = await profileAPI.savePhoto(file)
+    if (res.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(res.data.data.photos))
+    }
+}
 
-            if (res.data.resultCode === 0 ){
-                dispatch(savePhotoSuccess(res.data.data.photos))
-            }
+export const saveProfile = (profile: UserProfileType) => async (dispatch: any, getState: ()=>AppStateType) => {
+    const userId = getState().auth.userId
+    let res = await profileAPI.saveProfile(profile)
+    if (res.data.resultCode === 0) {
+        if (userId) {
+            await dispatch(getUserProfileTC(userId))
+        } else {
 
+        }
+    } else {
+        dispatch(stopSubmit('edit-profile', {_error: res.data.messages[0]}))
+        return res.data.messages[0]
+    }
+    return res
 }
