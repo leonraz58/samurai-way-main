@@ -4,7 +4,6 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainerUnused";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp, setInitialized} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
@@ -12,6 +11,7 @@ import {Preloader} from "./components/common/preloader/Preloader";
 
 //import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import {LoginContainer} from "./components/Login/Login";
 
 
 
@@ -51,7 +51,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path='/users'
                                render={() => <UsersContainer/>}/>
                         <Route path='/login'
-                               render={() => <Login/>}/>
+                               render={() => <LoginContainer/>}/>
                     </div>
                 </div>
             </BrowserRouter>

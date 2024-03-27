@@ -18,6 +18,7 @@ export function withAuthRedirect<T>(Component: ComponentType<T>) {
     const RedirectComponent = (props: mapStateToPropsType) => {
   //  debugger
         let {isAuth, ...restProps} = props
+        //alert('isAuth'+ isAuth)
         if (isAuth === false) return <Redirect to={'login'}/>
         return <Component
             //value={100500}

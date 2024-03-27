@@ -56,7 +56,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
         if (this.props.match.params.userId != prevProps.match.params.userId) {
-            debugger
+            //debugger
             this.refreshProfile()
         }
 
@@ -64,6 +64,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         // if (this.props.isAuth === false) return <Redirect to={'login'}/>
+        //alert('profile container')
         return (
             <Profile profile={this.props.profile}
                      //isAuth={this.props.isAuth}

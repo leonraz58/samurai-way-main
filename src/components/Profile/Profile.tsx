@@ -24,6 +24,7 @@ type ProfilePropsType = {
 }
 
 export const Profile = (props:ProfilePropsType) => {
+    //alert('profile is render')
     //debugger
     //console.log(props)
     return (
